@@ -1,0 +1,16 @@
+body{
+	text-align: center;
+}
+
+form{
+	margin: auto;
+	text-align: center;
+	background: skyblue;
+	padding: 20px;
+	margin: 10px 30px;
+	
+}
+
+input{
+	margin: 10px;
+}
