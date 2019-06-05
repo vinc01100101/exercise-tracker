@@ -86,15 +86,14 @@ const getData = (res,data)=>{
 		isAlreadyExist('_id',data.userId,(err,result)=>{
 			if(err)throw err;
 			if(result){
-				let temp = result;
-				/* const log = result.log.filter(obj=>{
-					return obj.duration >= data.from && obj.duration <= data.to;
-				}).slice(0,data.limit)
-				temp.log = log; */
-				res.json(temp)
+				const log = result.log.filter(obj=>{
+					return obj.duration >= (data.from || 0) && obj.duration <= (data.to || Math.max(...result.log.map(d=>d.duration)));
+				}).slice(0,(data.limit || result.log.length))
+				result.log = log;
+				res.json(result)
 			}else{
 				console.log("ID not found");
-				res.send("Invalid ID")
+				res.send("Invalid ID");
 			}
 		})
 	})
